@@ -9,6 +9,9 @@ int main(){
         cout<<"Seleccione algunas de las siguientes opciones: "<<endl;
         cout<<"1. Cargar Socios"<<endl; 
         cout<<"2. Listar Socios"<<endl;
+        cout<<"3. Buscar Socios"<<endl;
+        cout<<"4. Modificar Socios"<<endl;
+        cout<<"5. Exportar Socios a CSV"<<endl;
         cout<<"0. Salir"<<endl;
         cin>>opcion;
         switch(opcion){
@@ -19,6 +22,21 @@ int main(){
             break;
             case 2:
             manager.listarSocios();
+            system("pause");
+            system("cls");
+            break;
+            case 3:
+            manager.buscarSocios();
+            system("pause");
+            system("cls");
+            break;
+            case 4:
+            manager.modificarSocios();
+            system("pause");
+            system("cls");
+            break;
+            case 5:
+            manager.exportarACSV();
             system("pause");
             system("cls");
             break;
