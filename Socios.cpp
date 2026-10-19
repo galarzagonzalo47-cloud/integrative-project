@@ -31,3 +31,25 @@ std::string Socios::getEmail(){
 bool Socios::getEstado(){
     return _estado;
 }
+
+void Socios::setNumSocio(int _NumSocio){
+    _numSocio = _NumSocio;
+}
+void Socios::setDni(int _Dni){
+    _dni = _Dni;
+}
+void Socios::setNombre(std::string _Nombre){
+    strcpy(_nombre, _Nombre.c_str());
+}
+void Socios::setApellido(std::string _Apellido){
+    strcpy(_apellido, _Apellido.c_str());
+}
+void Socios::setTelefono(std::string _Telefono){
+    strcpy(_telefono, _Telefono.c_str());
+}
+void Socios::setEmail(std::string _Email){
+    strcpy(_email, _Email.c_str());
+}
+void Socios::setEstado(bool _Estado){
+    _estado = _Estado;
+}
