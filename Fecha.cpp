@@ -13,11 +13,11 @@ void Fecha::mostrar(){
     cout<<_dia<<"/"<<_mes<<"/"<<_anio;
 }
 void Fecha::cargar(){  
-        cout<<"Ingrese el dia: ";
+        cout<<"Dia: ";
         cin>> _dia;
-        cout<<"Ingrese el mes: ";
+        cout<<"Mes: ";
         cin>>_mes;
-        cout<<"Ingrese el anio: ";
+        cout<<"Anio: ";
         cin>>_anio;
 }
 

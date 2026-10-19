@@ -9,6 +9,7 @@ class Fecha{
     int _anio;
 
     public:
+    Fecha();
     void mostrar();
     void cargar();
 

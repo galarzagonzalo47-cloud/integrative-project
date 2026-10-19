@@ -1,6 +1,37 @@
 #include <iostream>
+#include "SociosManager.h"
 
+int main(){
+    SociosManager manager;
+    int opcion;
+    do{
+        cout<<"BIENVENIDO AL MENU DE GESTION DE FUTBOL"<<endl;
+        cout<<"Seleccione algunas de las siguientes opciones: "<<endl;
+        cout<<"1. Cargar Socios"<<endl; 
+        cout<<"2. Listar Socios"<<endl;
+        cout<<"0. Salir"<<endl;
+        cin>>opcion;
+        switch(opcion){
+            case 1:
+            manager.cargarSocios();
+            system("pause");
+            system("cls");
+            break;
+            case 2:
+            manager.listarSocios();
+            system("pause");
+            system("cls");
+            break;
 
+            default:
+            if(opcion != 0){
+                cout<<"Opcion invalida, intente nuevamente"<<endl;
+                system("pause");
+            }
+        }
+    }while(opcion != 0);
+    return 0;
+}
 
 /*
 Claude quiere que mandemos esto: 
@@ -19,6 +50,7 @@ Telefono : char[20]
 Email : char[40]
 FechaNacimiento : Fecha
 Estado : bool
+//HECHO
 
 Profesor.dat
 NumProfesor : int

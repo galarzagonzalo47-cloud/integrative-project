@@ -16,6 +16,7 @@ class Socios{ //Clase Socios
     char _apellido[30];
     char _telefono[20];
     char _email [40];
+    Fecha _fechaNacimiento;
     bool _estado;
 
     public:
@@ -27,6 +28,7 @@ class Socios{ //Clase Socios
     std::string getApellido();
     std::string getTelefono();
     std::string getEmail();
+    Fecha getFechaNacimiento();
     bool getEstado();
 
     void setNumSocio( int _NumSocio);
@@ -35,6 +37,7 @@ class Socios{ //Clase Socios
     void setApellido(std::string _Apellido);
     void setTelefono(std::string _Telefono);
     void setEmail(std::string _Email);
+    void setFechaNacimiento(Fecha _FechaNacimiento);
     void setEstado(bool _Estado);
 };
 

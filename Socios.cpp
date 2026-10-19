@@ -8,8 +8,13 @@ Socios::Socios(){
     strcpy(_telefono, "");
     strcpy(_email, "");
     _estado=false;
+
 };
 
+
+Fecha Socios::getFechaNacimiento(){
+    return _fechaNacimiento;
+}
 int Socios::getNumSocio(){
     return _numSocio;
 }
@@ -32,6 +37,9 @@ bool Socios::getEstado(){
     return _estado;
 }
 
+void Socios::setFechaNacimiento(Fecha _FechaNacimiento){
+    _fechaNacimiento = _FechaNacimiento;
+}
 void Socios::setNumSocio(int _NumSocio){
     _numSocio = _NumSocio;
 }
