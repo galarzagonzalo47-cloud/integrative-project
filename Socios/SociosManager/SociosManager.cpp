@@ -10,37 +10,51 @@ void SociosManager::cargarSocios(){
     int numSocio, dni;
     bool estado = false;
     std::string nombre, apellido, telefono, email;
-    cout<<"Ingrese el numero de socios: ";
+    cout<<"Ingresar numero de socio: ";
     cin>>numSocio;
-    reg.setNumSocio(numSocio);
     cout<<endl;
-    cout<<"Ingrese el DNI del socio: ";
+
+    cout<<"Ingresar DNI: ";
     cin>>dni;
-    reg.setDni(dni);
-    cout<<endl;
     cin.ignore(); // Limpiar el buffer de entrada antes de usar getline
-    cout<<"Ingrese el nombre del socio: ";
+    cout<<endl;
+
+    cout<<"Ingresar nombre: ";
     getline(cin, nombre);
-    reg.setNombre(nombre.c_str());
     cout<<endl;
-    cout<<"Ingrese el apellido del socio: ";
+
+    cout<<"Ingresar apellido: ";
     getline(cin, apellido);
-    reg.setApellido(apellido.c_str());
     cout<<endl;
-    cout<<"Ingrese un telefono del socio: ";
+
+    cout<<"Ingresar telefono: ";
     getline(cin, telefono);
-    reg.setTelefono(telefono.c_str());
     cout<<endl;
-    cout<<"Ingrese un email del socio: ";
+    
+    cout<<"Ingresar email: ";
     getline(cin, email);
-    reg.setEmail(email.c_str());
     cout<<endl;
-    cout<<"Ingrese la fecha de nacimiento del socio: "<<endl;
+    
+    cout<<"Ingresar fecha de nacimiento: "<<endl;
     Fecha fechaNacimiento;
     fechaNacimiento.cargar();
-    reg.setFechaNacimiento(fechaNacimiento);
     cout<<endl;
+
+    bool valido = ValidarSocio(numSocio, dni, nombre, apellido, telefono, email, fechaNacimiento);
+
+    if(!valido){
+        return;
+    }
+
     reg.setEstado(true);
+    reg.setNumSocio(numSocio);
+    reg.setDni(dni);
+    reg.setNombre(nombre.c_str());
+    reg.setApellido(apellido.c_str());
+    reg.setTelefono(telefono.c_str());
+    reg.setEmail(email.c_str());
+    reg.setFechaNacimiento(fechaNacimiento);
+
 
     if(_archivo.guardar(reg)){
         cout<<"Socio cargado correctamente"<<endl;
@@ -56,13 +70,15 @@ void SociosManager::listarSocios(){
     int cantidad = _archivo.getCantidadRegistros();
     for( int i = 0; i < cantidad;  i++){
         reg = _archivo.leer(i);
+        cout<<"========================================"<<endl;
         cout<<"Numero de socio: "<<reg.getNumSocio()<<endl;
         cout<<"DNI del socio: "<<reg.getDni()<<endl;
         cout<<"Nombre del socio: "<<reg.getNombre()<<endl;
         cout<<"Apellido del socio: "<<reg.getApellido()<<endl;
         cout<<"Telefono del socio: "<<reg.getTelefono()<<endl;
         cout<<"Email del socio: "<<reg.getEmail()<<endl;
-        cout<<"Fecha de nacimiento del socio:";
+        cout<<"Fecha de nacimiento del socio:"<<endl;
+        cout<<"========================================"<<endl;
         reg.getFechaNacimiento().mostrar();
         cout<<endl;
 
@@ -98,7 +114,7 @@ void SociosManager::buscarSocios(){
         cout<<"Apellido del socio: "<<reg.getApellido()<<endl;
         cout<<"Telefono del socio: "<<reg.getTelefono()<<endl;
         cout<<"Email del socio: "<<reg.getEmail()<<endl;
-        cout<<"Fecha de nacimiento del socio:";
+        cout<<"Fecha de nacimiento del socio:"<<endl;
         reg.getFechaNacimiento().mostrar();
         cout<<endl;
 
@@ -136,6 +152,7 @@ void SociosManager::modificarSocios(){
         cout<<"8. Modificar todo"<<endl;
         cout<<"0. Salir"<<endl;
         cin>>op;
+        cin.ignore(); // Limpiar el buffer de entrada antes de usar getline
 
         switch(op){
             case 1:{
@@ -191,6 +208,7 @@ void SociosManager::modificarSocios(){
                 int dni;
                 std::string nom, apellido, telefono, email;
                 bool estado;
+                Fecha fechaNacimiento;
                 cout<<"Ingrese el nuevo DNI: ";
                 cin>>dni;
                 cin.ignore(); // Limpiar el buffer de entrada antes de usar getline
@@ -204,22 +222,37 @@ void SociosManager::modificarSocios(){
                 getline(cin, email);
                 cout<<"Ingrese el nuevo estado (1 para activo, 0 para inactivo): ";
                 cin>>estado;
+                cout<<endl;
+                cout<<"Ingrese la nueva fecha de nacimiento: "<<endl;
+                fechaNacimiento.cargar();
+
+                bool valido = ValidarSocio(numSocio, dni, nom, apellido, telefono, email, fechaNacimiento, pos);
+                if(!valido){
+                    cout<<"Los datos ingresados no son validos"<<endl;
+                    break;
+                }
+
                 reg.setDni(dni);
                 reg.setNombre(nom.c_str());
                 reg.setApellido(apellido.c_str());
                 reg.setTelefono(telefono.c_str());
                 reg.setEmail(email.c_str());
-                reg.setEstado(estado);
-                Fecha fechaNacimiento;
-                cout<<"Ingrese la nueva fecha de nacimiento: "<<endl;
-                fechaNacimiento.cargar();
+                reg.setEstado(estado);                
                 reg.setFechaNacimiento(fechaNacimiento);
                 break;
             }
+
+            case 0:
+            break;
+
             default:
             cout<<"Opcion invalida"<<endl;
         }
-        if(_archivo.modificar(reg, pos)){
+        if(op != 0 && !ValidarSocio(reg.getNumSocio(), reg.getDni(), reg.getNombre(), reg.getApellido(), reg.getTelefono(), reg.getEmail(), reg.getFechaNacimiento(), pos)){
+            cout<<"No se guardaron los cambios, datos invalidos"<<endl;
+            reg = _archivo.leer(pos); // Descartar los datos invalidos que quedaron en memoria
+        }
+        else if(_archivo.modificar(reg, pos)){
             cout<<"Socio modificado correctamente"<<endl;
         }
         else{
@@ -229,3 +262,75 @@ void SociosManager::modificarSocios(){
     }while(op !=0);
     }
 }
+
+
+bool SociosManager::ValidarSocio(int numSocio, int dni, string nombre, string apellido, string telefono, string email, Fecha fechaNacimiento, int posExcluir)
+    {
+        if (numSocio <=0){
+            cout<<"El numero de socio debe ser mayor a 0"<<endl;
+            return false;
+        }
+
+        int posNumSocio = _archivo.buscarPorID(numSocio);
+        if (posNumSocio != -1 && posNumSocio != posExcluir){
+            cout<<"Ya existe un socio con ese numero de socio"<<endl;
+            return false;
+        }
+
+        if (dni <= 0 || to_string(dni).length() != 8){
+            cout<<"El DNI debe tener exactamente 8 digitos"<<endl;
+            return false;
+        }
+
+        int posDni = _archivo.buscarPorDni(dni);
+        if (posDni != -1 && posDni != posExcluir){
+            cout<<"Ya existe un socio con ese DNI"<<endl;
+            return false;
+        }
+
+        if (nombre.empty()){
+            cout<<"El nombre no puede estar vacio"<<endl;
+            return false;
+        }
+
+        if (apellido.empty()){
+            cout<<"El apellido no puede estar vacio"<<endl;
+            return false;
+        }
+
+        if (telefono.empty()){
+            cout<<"El telefono no puede estar vacio"<<endl;
+            return false;
+        }
+
+        if (email.empty()){
+            cout<<"El email no puede estar vacio"<<endl;
+            return false;
+        }
+
+        size_t posArroba = email.find('@');
+        size_t posPunto = email.find('.', posArroba);
+
+        if (posArroba == string::npos || posArroba == 0 || posArroba == email.length() - 1
+            || posPunto == string::npos || posPunto == posArroba + 1 || posPunto == email.length() - 1){
+            cout<<"El email no tiene un formato valido (ejemplo: nombre@dominio.com)"<<endl;
+            return false;
+        }
+
+        if (fechaNacimiento.getDia() <= 0 || fechaNacimiento.getDia() > 31){
+            cout<<"El dia de nacimiento debe estar entre 1 y 31"<<endl;
+            return false;
+        }
+        
+        if (fechaNacimiento.getMes() <= 0 || fechaNacimiento.getMes() > 12){
+            cout<<"El mes de nacimiento debe estar entre 1 y 12"<<endl;
+            return false;
+        }
+        
+        if (fechaNacimiento.getAnio() <=0){
+            cout<<"La fecha de nacimiento debe ser mayor a 0"<<endl;
+            return false;
+        }
+
+        return true;
+    }

@@ -60,6 +60,25 @@ int SociosArchivo::buscarPorID(int id){
     return -1; //Si no se encontro el registro, devolvemos -1
 }
 
+int SociosArchivo::buscarPorDni(int dni){
+    FILE *p = fopen ( _nombreArchivo.c_str(), "rb");
+    if ( p ==NULL ){
+        cout<<"Error al buscar el registro"<<endl;
+        return -1; //Si no se pudo abrir el archivo, devolvemos -1
+    }
+    Socios aux;
+    int pos = 0;
+    while ( fread(&aux, sizeof(Socios), 1, p) ){
+        if ( aux.getDni() == dni ){ //Si el DNI del registro que leimos es igual al DNI que estamos buscando, devolvemos la posicion del registro
+            fclose(p);
+            return pos;
+        }
+        pos++;
+    }
+    fclose(p);
+    return -1; //Si no se encontro el registro, devolvemos -1
+}
+
 int SociosArchivo::modificar(Socios reg, int pos){
     FILE *p = fopen ( _nombreArchivo.c_str(), "rb+");
     if (p == NULL){
