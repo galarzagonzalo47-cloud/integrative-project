@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include "Migrador.h"
 #include "SociosArchivo.h"
 
 

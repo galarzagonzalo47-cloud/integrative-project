@@ -1,5 +1,4 @@
 #include "SociosManager.h"
-#include "Migrador.h"
 
 SociosManager::SociosManager(){
     _archivo = SociosArchivo();
@@ -96,9 +95,7 @@ void SociosManager::listarSocios(){
 
 }
 
-void SociosManager::exportarACSV() {
-    exportarSociosACSV(); 
-}
+
 
 void SociosManager::buscarSocios(){
 
@@ -139,6 +136,14 @@ void SociosManager::modificarSocios(){
     int pos = _archivo.buscarPorID(numSocio);
     if(pos != -1){
         reg = _archivo.leer(pos);
+        cout<<"Numero de socio: "<<reg.getNumSocio()<<endl;
+        cout<<"DNI del socio: "<<reg.getDni()<<endl;
+        cout<<"Nombre del socio: "<<reg.getNombre()<<endl;
+        cout<<"Apellido del socio: "<<reg.getApellido()<<endl;
+        cout<<"Telefono del socio: "<<reg.getTelefono()<<endl;
+        cout<<"Email del socio: "<<reg.getEmail()<<endl;
+        cout<<"Fecha de nacimiento del socio:";
+        reg.getFechaNacimiento().mostrar();
         cout<<endl;
         do{
         cout<<"Que desea modificar "<<endl;
@@ -164,6 +169,7 @@ void SociosManager::modificarSocios(){
             }
             case 2:{
             std::string nom;
+            cin.ignore();
             cout<<"Ingrese el nuevo nombre: ";
             getline(cin, nom);
             reg.setNombre(nom.c_str());
@@ -327,8 +333,8 @@ bool SociosManager::ValidarSocio(int numSocio, int dni, string nombre, string ap
             return false;
         }
         
-        if (fechaNacimiento.getAnio() <=0){
-            cout<<"La fecha de nacimiento debe ser mayor a 0"<<endl;
+        if (fechaNacimiento.getAnio() <=1930){
+            cout<<"El anio de nacimiento debe ser mayor a 1930"<<endl;
             return false;
         }
 

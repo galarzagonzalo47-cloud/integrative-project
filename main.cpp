@@ -40,7 +40,6 @@ int main(){
             system("pause");
             system("cls");
             break;
-
             default:
             if(opcion != 0){
                 cout<<"Opcion invalida, intente nuevamente"<<endl;
@@ -49,7 +48,7 @@ int main(){
         }
     }while(opcion != 0);
     return 0;
-}
+};
 
 /*
 Claude quiere que mandemos esto: 
