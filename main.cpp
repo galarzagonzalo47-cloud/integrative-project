@@ -35,6 +35,7 @@ Telefono : char[20]
 Email : char[40]
 FechaNacimiento : Fecha
 Estado : bool
+//HECHO 
 
 Disciplina.dat
 NumDisciplina : int

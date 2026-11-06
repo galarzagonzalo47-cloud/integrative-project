@@ -3,6 +3,7 @@
 Menu::Menu(){
     _sociosManager = SociosManager();
     _profesorManager = ProfesorManager();
+    _disciplinaManager = DisciplinaManager();
 }
 
 void Menu::mostrarMenu(){
@@ -12,6 +13,7 @@ void Menu::mostrarMenu(){
         cout<<"Ingrese alguna de las siguientes secciones: "<<endl;
         cout<<"1. Gestion de Socios"<<endl;
         cout<<"2. Gestion de Profesores"<<endl;
+        cout<<"3. Gestion de Disciplinas"<<endl;
         cout<<"0. Salir"<<endl;
         cin>>opcion;
 
@@ -21,6 +23,9 @@ void Menu::mostrarMenu(){
                 break;
             case 2:
                 _profesorManager.mostrarMenu();
+                break;
+            case 3:
+                _disciplinaManager.mostrarMenu();
                 break;
             default:
                 if(opcion != 0){

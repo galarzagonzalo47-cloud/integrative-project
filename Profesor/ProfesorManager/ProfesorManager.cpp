@@ -6,7 +6,7 @@ ProfesorManager::ProfesorManager(){
 
 void ProfesorManager::mostrarMenu(){
     int op;
-    cout<<"BIENVENIDO AL MENU DE GESTION DE PROFESORES"<<endl;
+    do{cout<<"BIENVENIDO AL MENU DE GESTION DE PROFESORES"<<endl;
     cout<<"Seleccione algunas de las siguientes opciones: "<<endl;
     cout<<"1. Cargar Profesor"<<endl;
     cout<<"2. Listar Profesores"<<endl;
@@ -32,6 +32,7 @@ void ProfesorManager::mostrarMenu(){
         default:
             cout<<"Opcion invalida, intente nuevamente"<<endl;
     }
+}while(op != 0);
 }
 
 void ProfesorManager::cargarProfesor(){
