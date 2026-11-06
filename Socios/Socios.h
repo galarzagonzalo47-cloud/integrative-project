@@ -3,7 +3,7 @@
 #include <string>
 #include <cstring>
 #include <cstdlib>
-#include "Fecha.h"
+#include "../Fecha/Fecha.h"
 
 using namespace std;
 

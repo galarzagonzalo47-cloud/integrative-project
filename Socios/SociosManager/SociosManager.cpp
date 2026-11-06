@@ -4,6 +4,36 @@ SociosManager::SociosManager(){
     _archivo = SociosArchivo();
 }
 
+void SociosManager::mostrarMenu(){
+    int op;
+    cout<<"BIENVENIDO AL MENU DE GESTION DE SOCIOS"<<endl;
+    cout<<"Seleccione algunas de las siguientes opciones: "<<endl;
+    cout<<"1. Cargar Socios"<<endl;
+    cout<<"2. Listar Socios"<<endl;
+    cout<<"3. Buscar Socios Por ID o DNI"<<endl;
+    cout<<"4. Modificar Socios"<<endl;
+    cout<<"0. Volver al menu principal"<<endl;
+    cin>>op;
+    switch(op){
+        case 1:
+            cargarSocios();
+            break;
+        case 2:
+            listarSocios();
+            break;
+        case 3:
+            buscarSocios();
+            break;
+        case 4:
+            modificarSocios();
+            break;
+        case 0:
+            return;
+        default:
+            cout<<"Opcion invalida, intente nuevamente"<<endl;
+    }
+}
+
 void SociosManager::cargarSocios(){
     Socios reg;
     int numSocio, dni;
@@ -15,7 +45,7 @@ void SociosManager::cargarSocios(){
 
     cout<<"Ingresar DNI: ";
     cin>>dni;
-    cin.ignore(); // Limpiar el buffer de entrada antes de usar getline
+    cin.ignore();  
     cout<<endl;
 
     cout<<"Ingresar nombre: ";
@@ -95,12 +125,26 @@ void SociosManager::listarSocios(){
 
 }
 
-
-
 void SociosManager::buscarSocios(){
+    cout<<"Desea buscar al socio por numero de socio o por DNI?"<<endl;
+    cout<<"1. Numero de socio"<<endl;
+    cout<<"2. DNI"<<endl;
+    int op;
+    cin>>op;
+    if(op == 1){
+        buscarSocioPorID();
+    }
+    else if(op == 2){
+        buscarSocioPorDni();
+    }
+    else{
+        cout<<"Opcion invalida"<<endl;
+    }
+}
 
+void SociosManager::buscarSocioPorID(){
     int numSocio;
-    cout<<"Ingrese el numero de socio a buscar: ";
+    cout<<"Ingrese el ID del socio a buscar: ";
     cin>>numSocio;
     int pos = _archivo.buscarPorID(numSocio); //Buscamos el socio por su numero de socio y obtenemos la posicion del mismo en el archivo
     if(pos != -1){
@@ -114,7 +158,6 @@ void SociosManager::buscarSocios(){
         cout<<"Fecha de nacimiento del socio:"<<endl;
         reg.getFechaNacimiento().mostrar();
         cout<<endl;
-
         if(reg.getEstado()){
             cout<<"Estado del socio = ACTIVO"<<endl;
         }
@@ -126,6 +169,34 @@ void SociosManager::buscarSocios(){
         cout<<"No se encontro el socio"<<endl;
     }
 }
+
+void SociosManager::buscarSocioPorDni(){
+        int dni;
+        cout<<"Ingrese el DNI del socio a buscar: ";
+        cin>>dni;
+        int pos = _archivo.buscarPorDni(dni); //Buscamos el socio por su numero de socio y obtenemos la posicion del mismo en el archivo
+        if(pos != -1){
+            Socios reg = _archivo.leer(pos);
+            cout<<"Numero de socio: "<<reg.getNumSocio()<<endl;
+            cout<<"DNI del socio: "<<reg.getDni()<<endl;
+            cout<<"Nombre del socio: "<<reg.getNombre()<<endl;
+            cout<<"Apellido del socio: "<<reg.getApellido()<<endl;
+            cout<<"Telefono del socio: "<<reg.getTelefono()<<endl;
+            cout<<"Email del socio: "<<reg.getEmail()<<endl;
+            cout<<"Fecha de nacimiento del socio:"<<endl;
+            reg.getFechaNacimiento().mostrar();
+            cout<<endl;
+            if(reg.getEstado()){
+                cout<<"Estado del socio = ACTIVO"<<endl;
+            }
+            else{
+                cout<<"Estado del socio = INACTIVO"<<endl;
+            }
+        }
+        else{
+            cout<<"No se encontro el socio"<<endl;
+        }
+    }
 
 void SociosManager::modificarSocios(){
     int numSocio;
@@ -169,7 +240,6 @@ void SociosManager::modificarSocios(){
             }
             case 2:{
             std::string nom;
-            cin.ignore();
             cout<<"Ingrese el nuevo nombre: ";
             getline(cin, nom);
             reg.setNombre(nom.c_str());
@@ -254,21 +324,26 @@ void SociosManager::modificarSocios(){
             default:
             cout<<"Opcion invalida"<<endl;
         }
-        if(op != 0 && !ValidarSocio(reg.getNumSocio(), reg.getDni(), reg.getNombre(), reg.getApellido(), reg.getTelefono(), reg.getEmail(), reg.getFechaNacimiento(), pos)){
-            cout<<"No se guardaron los cambios, datos invalidos"<<endl;
-            reg = _archivo.leer(pos); // Descartar los datos invalidos que quedaron en memoria
-        }
-        else if(_archivo.modificar(reg, pos)){
-            cout<<"Socio modificado correctamente"<<endl;
-        }
-        else{
-            cout<<"Error al modificar el socio"<<endl;
+        if(op != 0){
 
-        };
+        if(!ValidarSocio(reg.getNumSocio(), reg.getDni(),
+        reg.getNombre(), reg.getApellido(),
+        reg.getTelefono(), reg.getEmail(),
+        reg.getFechaNacimiento(), pos)){
+
+        cout<<"No se guardaron los cambios, datos invalidos"<<endl;
+        reg = _archivo.leer(pos);
+    }
+        else if(_archivo.modificar(reg, pos)){
+        cout<<"Socio modificado correctamente"<<endl;
+    }
+        else{
+        cout<<"Error al modificar el socio"<<endl;
+    }
+}
     }while(op !=0);
     }
 }
-
 
 bool SociosManager::ValidarSocio(int numSocio, int dni, string nombre, string apellido, string telefono, string email, Fecha fechaNacimiento, int posExcluir)
     {

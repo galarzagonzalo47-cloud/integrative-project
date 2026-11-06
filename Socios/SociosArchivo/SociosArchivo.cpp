@@ -49,7 +49,7 @@ int SociosArchivo::buscarPorID(int id){
     }
     Socios aux;
     int pos = 0; //
-    while ( fread(&aux, sizeof(Socios), 1, p) ){
+    while ( fread(&aux, sizeof(Socios), 1, p)==1 ){
         if ( aux.getNumSocio() == id ){ //Si el ID del registro que leimos es igual al ID que estamos buscando, devolvemos la posicion del registro
             fclose(p);
             return pos;
@@ -68,7 +68,7 @@ int SociosArchivo::buscarPorDni(int dni){
     }
     Socios aux;
     int pos = 0;
-    while ( fread(&aux, sizeof(Socios), 1, p) ){
+    while ( fread(&aux, sizeof(Socios), 1, p)==1 ){
         if ( aux.getDni() == dni ){ //Si el DNI del registro que leimos es igual al DNI que estamos buscando, devolvemos la posicion del registro
             fclose(p);
             return pos;

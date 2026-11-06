@@ -1,3 +1,4 @@
+#include <cstring>
 #include "Profesor.h"
 
 Profesor::Profesor(){
@@ -28,7 +29,7 @@ std::string Profesor::getEmail(){
     return _email;
 }
 Fecha Profesor::getFechaNacimiento(){
-    return _fechaNacimineto;
+    return _fechaNacimiento;
 }
 bool Profesor::getEstado(){
     return _estado;
@@ -46,14 +47,14 @@ void Profesor::setNombre(std::string nombre){
 void Profesor::setApellido(std::string apellido){
     strcpy(_apellido, apellido.c_str());
 }
-void Profesor::setTelefono(std::strinng telefono){
+void Profesor::setTelefono(std::string telefono){
     strcpy(_telefono, telefono.c_str());
 }
 void Profesor::setEmail(std::string email){
     strcpy(_email, email.c_str());
 }
 void Profesor::setFechaNacimiento(Fecha fechanacimiento){
-    _fechaNacimineto=fechanacimiento;
+    _fechaNacimiento=fechanacimiento;
 }
 void Profesor::setEstado(bool estado){
     _estado=estado;

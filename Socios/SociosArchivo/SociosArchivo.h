@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "Socios.h"
+#include "../Socios.h"
 
 class SociosArchivo{
     private:

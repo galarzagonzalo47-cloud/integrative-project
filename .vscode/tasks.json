@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "C/C++: g++.exe build active file",
+            "command": "powershell",
+            "args": [
+                "-Command",
+                "chcp 65001 > $null; $files = (Get-ChildItem -Recurse -Filter *.cpp).FullName; g++ $files -o programa.exe; if ($?) { start programa.exe }"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"]
+        }
+    ]
+}
