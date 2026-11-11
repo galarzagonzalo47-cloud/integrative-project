@@ -72,7 +72,7 @@ void SociosManager::cargarSocios(){
     bool valido = ValidarSocio(numSocio, dni, nombre, apellido, telefono, email, fechaNacimiento);
 
     if(!valido){
-        return;
+        return "Error al validar el socio";
     }
 
     reg.setEstado(true);
@@ -388,6 +388,7 @@ bool SociosManager::ValidarSocio(int numSocio, int dni, string nombre, string ap
             cout<<"El email no puede estar vacio"<<endl;
             return false;
         }
+
 
         size_t posArroba = email.find('@');
         size_t posPunto = email.find('.', posArroba);
