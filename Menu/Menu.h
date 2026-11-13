@@ -14,5 +14,7 @@ class Menu{
     public:
     Menu();
     void mostrarMenu();
+    void enanogey();
+
 };
                             
