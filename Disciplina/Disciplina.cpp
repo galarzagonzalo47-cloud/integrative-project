@@ -1,4 +1,5 @@
 #include "Disciplina.h"
+#include <cstring>
 
 Disciplina::Disciplina(){
     _numDisciplina=0;
@@ -22,13 +23,13 @@ void Disciplina::setNumDiscplina(int numDisciplina){
     _numDisciplina=numDisciplina;
 }
 void Disciplina::setNombre(std::string nombre){
-    strcpy(_nombre, nombre.c_str());
+    strncpy(_nombre, nombre.c_str(), sizeof(_nombre) - 1);
+    _nombre[sizeof(_nombre) - 1] = '\0';
 }
 void Disciplina::setDescripcion(std::string descripcion){
-    strcpy(_descripcion, descripcion.c_str());
+    strncpy(_descripcion, descripcion.c_str(), sizeof(_descripcion) - 1);
+    _descripcion[sizeof(_descripcion) - 1] = '\0';
 }
 void Disciplina::setEstado(bool estado){
     _estado=estado;
 }
-
-

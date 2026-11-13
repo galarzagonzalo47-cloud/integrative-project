@@ -7,6 +7,9 @@ using namespace std;
 int SedesManager::pedirOpcion(){
     int op;
     while(!(cin >> op)){
+        if(cin.eof()){
+            return 0;
+        }
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Ingrese un numero valido: ";
@@ -25,6 +28,7 @@ void SedesManager::mostrarMenu(){
         cout << "2. Listar Sedes" << endl;
         cout << "3. Buscar Sedes Por ID o Nombre" << endl;
         cout << "4. Modificar Sedes" << endl;
+        cout << "5. Dar de baja Sede" << endl;
         cout << "0. Volver al menu principal" << endl;
         op = pedirOpcion();
         switch(op){
@@ -39,6 +43,9 @@ void SedesManager::mostrarMenu(){
                 break;
             case 4:
                 modificarSedes();
+                break;
+            case 5:
+                darDeBajaSede();
                 break;
             case 0:
                 break;
@@ -121,7 +128,7 @@ void SedesManager::buscarSedePorNombre(){
     cout << "Ingrese el nombre de la sede a buscar: ";
     getline(cin, nombre);
     int pos = _archivo.buscarPorNombre(nombre);
-    if(pos != -1 && _archivo.leer(pos).getEstado()){
+    if(pos != -1){
         _archivo.leer(pos).mostrar();
     }
     else{
@@ -139,6 +146,10 @@ void SedesManager::modificarSedes(){
     }
 
     Sedes reg = _archivo.leer(pos);
+    if(!reg.getEstado()){
+        cout << "La sede esta dada de baja, no se puede modificar" << endl;
+        return;
+    }
     reg.mostrar();
 
     string valor;
@@ -159,5 +170,38 @@ void SedesManager::modificarSedes(){
     }
     else{
         cout << "Error al modificar la sede" << endl;
+    }
+}
+
+void SedesManager::darDeBajaSede(){
+    cout << "Ingrese el ID de la sede que desea dar de baja: ";
+    int id = pedirOpcion();
+    int pos = _archivo.buscarPorID(id);
+    if(pos == -1){
+        cout << "No se encontro la sede" << endl;
+        return;
+    }
+
+    Sedes reg = _archivo.leer(pos);
+    if(!reg.getEstado()){
+        cout << "La sede ya esta dada de baja" << endl;
+        return;
+    }
+    reg.mostrar();
+
+    cout << "¿Esta seguro que desea dar de baja la sede? (s/n): ";
+    string respuesta;
+    getline(cin, respuesta);
+    if(respuesta != "s" && respuesta != "S"){
+        cout << "Operacion cancelada" << endl;
+        return;
+    }
+
+    reg.setEstado(false);
+    if(_archivo.modificar(reg, pos)){
+        cout << "Sede dada de baja correctamente" << endl;
+    }
+    else{
+        cout << "Error al dar de baja la sede" << endl;
     }
 }

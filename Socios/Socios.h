@@ -7,7 +7,6 @@
 
 using namespace std;
 
-
 class Socios{ //Clase Socios
     private:
     int _numSocio;
@@ -31,14 +30,16 @@ class Socios{ //Clase Socios
     Fecha getFechaNacimiento();
     bool getEstado();
 
-    void setNumSocio( int _NumSocio);
-    void setDni(int _Dni);
-    void setNombre(std::string _Nombre);
-    void setApellido(std::string _Apellido);
-    void setTelefono(std::string _Telefono);
-    void setEmail(std::string _Email);
-    void setFechaNacimiento(Fecha _FechaNacimiento);
-    void setEstado(bool _Estado);
+    void setNumSocio(int numSocio);
+    void setDni(int dni);
+    void setNombre(std::string nombre);
+    void setApellido(std::string apellido);
+    void setTelefono(std::string telefono);
+    void setEmail(std::string email);
+    void setFechaNacimiento(Fecha fechaNacimiento);
+    void setEstado(bool estado);
+
+    void mostrar();
 };
 
 /*

@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "../Disciplina.h"
 
 class DisciplinaArchivo{
@@ -12,4 +13,4 @@ class DisciplinaArchivo{
     bool modificar(Disciplina disciplina, int pos);
     int getCantidadRegistros();
     int buscarPorId(int id);
-}
+};

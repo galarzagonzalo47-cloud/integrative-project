@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <string>
 #include "../Fecha/Fecha.h"
 
 class Profesor{
@@ -25,12 +26,14 @@ class Profesor{
     Fecha getFechaNacimiento();
     bool getEstado();
 
-    void setNumProfesor( int _NumProfesor);
-    void setDni(int _Dni);
-    void setNombre(std::string _nombre);
-    void setApellido(std::string _apellido);
-    void setTelefono(std::string _telefono);
-    void setEmail(std::string _email);
-    void setFechaNacimiento(Fecha _fechaNacimiento);
-    void setEstado(bool _estado);
+    void setNumProfesor(int numProfesor);
+    void setDni(int dni);
+    void setNombre(std::string nombre);
+    void setApellido(std::string apellido);
+    void setTelefono(std::string telefono);
+    void setEmail(std::string email);
+    void setFechaNacimiento(Fecha fechaNacimiento);
+    void setEstado(bool estado);
+
+    void mostrar();
 };

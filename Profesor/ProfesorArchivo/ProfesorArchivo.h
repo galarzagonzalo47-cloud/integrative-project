@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "../Profesor.h"
 
 class ProfesorArchivo{
@@ -8,10 +9,10 @@ class ProfesorArchivo{
     public:
     ProfesorArchivo();
 
-    bool guardar (Profesor pos);
-    Profesor leer (int pos);
+    bool guardar(Profesor reg);
+    Profesor leer(int pos);
     int getCantidadDeRegistro();
-    int buscarPorId (int pos);
-    int buscarPorDni (int dni);
-    int modificarPorId (Profesor reg, int pos);
+    int buscarPorId(int id);
+    int buscarPorDni(int dni);
+    bool modificar(Profesor reg, int pos);
 };

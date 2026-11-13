@@ -69,7 +69,7 @@ int SedesArchivo::buscarPorNombre(string nombre){
     Sedes aux;
     int pos = 0;
     while ( fread(&aux, sizeof(Sedes), 1, p)==1 ){
-        if ( aux.getNombre() == nombre ){ //Si el nombre del registro que leimos es igual al nombre que estamos buscando, devolvemos la posicion del registro
+        if ( aux.getEstado() && aux.getNombre() == nombre ){ //Solo consideramos sedes activas cuyo nombre coincida con el buscado
             fclose(p);
             return pos;
         }

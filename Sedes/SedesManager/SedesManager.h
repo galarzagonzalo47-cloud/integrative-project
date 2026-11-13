@@ -12,6 +12,7 @@ class SedesManager{
     void listarSedes();
     void buscarSedes();
     void modificarSedes();
+    void darDeBajaSede();
     void buscarSedePorID();
     void buscarSedePorNombre();
 };

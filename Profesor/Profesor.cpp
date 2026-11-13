@@ -35,27 +35,43 @@ bool Profesor::getEstado(){
     return _estado;
 }
 
-void Profesor::setNumProfesor(int NumProfesor){
-    _numProfesor=NumProfesor;
+void Profesor::setNumProfesor(int numProfesor){
+    _numProfesor=numProfesor;
 }
 void Profesor::setDni(int dni){
     _dni=dni;
 }
 void Profesor::setNombre(std::string nombre){
-    strcpy(_nombre, nombre.c_str());
+    strncpy(_nombre, nombre.c_str(), sizeof(_nombre) - 1);
+    _nombre[sizeof(_nombre) - 1] = '\0';
 }
 void Profesor::setApellido(std::string apellido){
-    strcpy(_apellido, apellido.c_str());
+    strncpy(_apellido, apellido.c_str(), sizeof(_apellido) - 1);
+    _apellido[sizeof(_apellido) - 1] = '\0';
 }
 void Profesor::setTelefono(std::string telefono){
-    strcpy(_telefono, telefono.c_str());
+    strncpy(_telefono, telefono.c_str(), sizeof(_telefono) - 1);
+    _telefono[sizeof(_telefono) - 1] = '\0';
 }
 void Profesor::setEmail(std::string email){
-    strcpy(_email, email.c_str());
+    strncpy(_email, email.c_str(), sizeof(_email) - 1);
+    _email[sizeof(_email) - 1] = '\0';
 }
-void Profesor::setFechaNacimiento(Fecha fechanacimiento){
-    _fechaNacimiento=fechanacimiento;
+void Profesor::setFechaNacimiento(Fecha fechaNacimiento){
+    _fechaNacimiento=fechaNacimiento;
 }
 void Profesor::setEstado(bool estado){
     _estado=estado;
+}
+
+void Profesor::mostrar(){
+    std::cout<<"Numero de profesor: "<<_numProfesor<<std::endl;
+    std::cout<<"DNI: "<<_dni<<std::endl;
+    std::cout<<"Nombre: "<<_nombre<<std::endl;
+    std::cout<<"Apellido: "<<_apellido<<std::endl;
+    std::cout<<"Telefono: "<<_telefono<<std::endl;
+    std::cout<<"Email: "<<_email<<std::endl;
+    std::cout<<"Fecha de nacimiento: ";
+    _fechaNacimiento.mostrar();
+    std::cout<<std::endl;
 }

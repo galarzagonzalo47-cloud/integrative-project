@@ -1,5 +1,5 @@
 #pragma once
-#include "../Disciplina.h/DisciplinaArchivo.h"
+#include "../DisciplinaArchivo/DisciplinaArchivo.h"
 
 class DisciplinaManager{
     private:
@@ -12,4 +12,5 @@ class DisciplinaManager{
     void buscarDisciplina();
     void modificarDisciplina();
     void mostrarMenu();
+    void darDeBajaDisciplina();
 };

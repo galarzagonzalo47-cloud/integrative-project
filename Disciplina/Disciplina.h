@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+#include <string>
 
 class Disciplina{
     private:
@@ -21,8 +21,6 @@ class Disciplina{
     void setEstado(bool estado);
 };
 
-
-
 /*
 Disciplina.dat
 NumDisciplina : int
@@ -30,4 +28,3 @@ Nombre : char[40]
 Descripcion : char[80]
 Estado : bool
 */
-
