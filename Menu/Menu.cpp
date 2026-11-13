@@ -4,7 +4,7 @@ Menu::Menu(){
     _sociosManager = SociosManager();
     _profesorManager = ProfesorManager();
     _disciplinaManager = DisciplinaManager();
-    _sedeManager = SedeManager();
+    _sedesManager = SedesManager();
 }
 
 void Menu::mostrarMenu(){
@@ -30,7 +30,7 @@ void Menu::mostrarMenu(){
                 _disciplinaManager.mostrarMenu();
                 break;
             case 4:
-                _sedeManager.mostrarMenu();
+                _sedesManager.mostrarMenu();
                 break;
             default:
                 if(opcion != 0){

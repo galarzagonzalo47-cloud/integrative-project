@@ -42,6 +42,7 @@ NumDisciplina : int
 Nombre : char[40]
 Descripcion : char[80]
 Estado : bool
+//HECHO 
 
 Sede.dat
 NumSede : int
@@ -49,6 +50,7 @@ Nombre : char[40]
 Direccion : char[60]
 Telefono : char[20]
 Estado : bool
+//HECHO 
 
 Actividad.dat
 NumActividad : int
