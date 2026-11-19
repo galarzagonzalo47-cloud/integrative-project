@@ -1,15 +1,20 @@
 #pragma once
 #include <iostream>
+#include "../Clubes/ClubesManager/ClubesManager.h"
 #include "../Socios/SociosManager/SociosManager.h"
-#include "../Profesor/ProfesorManager/ProfesorManager.h"
-#include "../Disciplina/DisciplinaManager/DisciplinaManager.h"
+#include "../Profesor/ProfesoresManager/ProfesoresManager.h"
+#include "../Disciplina/DisciplinasManager/DisciplinasManager.h"
 #include "../Sedes/SedesManager/SedesManager.h"
+#include "../Actividades/ActividadesManager/ActividadesManager.h"
+
 class Menu{
     private:
+    ClubesManager _clubesManager;
     SociosManager _sociosManager;
-    ProfesorManager _profesorManager;
-    DisciplinaManager _disciplinaManager;
+    ProfesoresManager _profesoresManager;
+    DisciplinasManager _disciplinasManager;
     SedesManager _sedesManager;
+    ActividadesManager _actividadesManager;
 
     public:
     Menu();
